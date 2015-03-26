@@ -45,23 +45,33 @@ Installation:
 settings.py
 -----------
 
-# At the beginning
+``At the beginning``
 DEBUG_PQPRO = True
 
-# Somewhere
+
+``Somewhere``
+
 PQPRO_ENVIROMENT = 'dev'     # dev / test / real
+
 PQPRO_SECRET_KEY = '12341234123412341234123412341234' # Make this unique, and don't share it with anybody. (PQPro Secret's key)
+
 PQPRO_DEBUGGER = DEBUG and DEBUG_PQPRO
+
 PQPRO_EXAMPLES = []
+
 PQPRO_EXAMPLES.append(('Example 1','{"config": {"action": "getprice","auth": "127.0.0.1","enviroment": "dev","service": "package","user":"br0th3r"},"request": {"cp":"29003","kg":3.0}}'))
+
 PQPRO_EXAMPLES.append(('Example 2','{"123":"456"}'))
 
-# Add the project to your INSTALLED_APPS
+``Add the project to your INSTALLED_APPS``
 
 urls.py
 -------
+
 url(r'^pqpro/',     include('pqpro.urls')),
+
 (r'^pqpro$',        include('pqpro.urls')),
+
 (r'^pqpro/',        include('pqpro.urls')),
 
 Why this project?
@@ -74,6 +84,11 @@ The idea of PQPro came up when I was workig for a company that needed to write s
 After working with several technologies for 3 years (2008-2009-2010) I realized that SOAP-RPC was slow to integrate (too much provider's logic in the client side), XML was a mess (too much meta data for such a few information to send/receive), I also saw many ugly implemtations for SOAP+XML (combined in several non-standard ways).
 
 So I decided to write my own library for Django, focusing on several points that were important to me.
+
+TODO
+====
+
+Add full documentation explaning how to use it.
 
 License
 =======
