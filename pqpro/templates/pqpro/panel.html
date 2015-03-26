@@ -1,0 +1,41 @@
+{% extends "pqpro/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Administration panel' %}{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+function example(cid) {
+    var txtArea = document.getElementsByName('query')[0];
+    if (!cid) {
+        e='';
+    {% for example in examples %}
+    } else if (cid=='{{example.cid}}') { e='{{example.query|escapejs}}';
+    {% endfor %}
+    } else {
+        e='';
+    }
+    txtArea.value = e;
+}
+</script>
+{% endblock %}
+
+{% block content %}
+    <form method='POST' action=''>
+        {% csrf_token %}
+        <table border='0'>
+            <tr>
+                <td style='border:0px; vertical-align:top;'>Consulta:<br /><textarea rows='38' cols='70' name='query' {%if error%}style='background-color:#FFCCCC;'{%endif%}>{{query}}</textarea></td>
+                <td style='border:0px; vertical-align:top;'>Respuesta:<br /><textarea rows='38' cols='70' name='answer'>{{answer}}</textarea></td>
+                <td style='border:0px; vertical-align:top;'><br /><input type='submit' name='submit' value='{% trans 'Send' %}'><br /><font size='1'>[&nbsp;{{total_time}}&nbsp;{% trans 'seconds' %}&nbsp;]</font><br />
+                    <center>
+                        <h2>{% trans 'Examples' %}</h2>
+                        {% for example in examples %}
+                            <a href='#' onclick='example("{{example.cid}}")'>{{example.cid}}</a><br />
+                        {% endfor %}
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
